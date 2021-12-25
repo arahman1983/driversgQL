@@ -6,3 +6,18 @@
   box-sizing: border-box;
   border-radius: 4px;
 }
+
+.resultsUL{
+  background: #FDFDFD;
+  border-radius: 4px;
+  padding: 16px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.resultsUL li{
+  list-style: none;
+  font-size: 14px;
+  font-weight: 400;
+  margin-inline-start: 8px;
+}

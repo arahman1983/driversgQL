@@ -1,0 +1,47 @@
+.ResultRow{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.ResultRow:last-child{
+  margin-bottom: 0px;
+}
+
+.driverData{
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  line-height: 20px;
+}
+.phone{
+  color: #69665C;
+}
+.timeContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.time{
+  border-radius: 80px;
+  padding: 8px;
+  background-color: #ddd;
+  align-items: flex-end;
+}
+
+.success{
+  background-color: #EAF2EE;
+  color: #2D7E58;
+} 
+.primary{
+  background-color: #E8F0F7;
+  color: #1E68B1;
+}
+.warning{
+  background-color: #F9F0E7;
+  color: #C76A14;
+} 
+.danger{
+  background-color: #F8EAEC;
+  color: #BE2F40;
+}
