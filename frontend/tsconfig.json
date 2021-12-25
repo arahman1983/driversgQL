@@ -8,5 +8,9 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "declaration": true
-  }
+  },
+  "include": [
+		"**/*.ts",
+    ".d.ts"
+	],
 }
