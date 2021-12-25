@@ -10,5 +10,5 @@ export const App: FC = () => {
     <div className='app-container'>
       <SearchView />
     </div>
-    )
+  )
 }

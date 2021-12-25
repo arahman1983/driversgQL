@@ -1,0 +1,8 @@
+.container{
+  margin-top: 32px;
+  width: 451px;
+  background: #FDFDFD;
+  border: 1px solid #EBEBEA;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
