@@ -4,7 +4,6 @@
   border: 1px solid #EBEBEA;
   box-sizing: border-box;
   border-radius: 4px;
-  overflow: hidden;
 }
 
 .searchHeader{
@@ -34,4 +33,28 @@
   position: absolute;
   top: 26px;
   right: 32px;
+}
+
+.suggestions{
+  background: #FDFDFD;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  position: absolute;
+  top: 34px;
+  left: 24px;
+  width: 400px;
+  padding: 0px;
+}
+
+.suggestions li{
+  list-style: none;
+  padding-top: 16px;
+  padding-inline-start: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.suggestions li:last-child{
+  padding-bottom: 16px;
 }
