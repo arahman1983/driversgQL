@@ -1,8 +1,8 @@
-export const calculateDistance = (long1:number, lat1:number, long2:number , lat2:number) => {
-        const lon_1 =  long1 * Math.PI / 180;
-        const lon_2 = long2 * Math.PI / 180;
-        const lat_1 = lat1 * Math.PI / 180;
-        const lat_2 = lat2 * Math.PI / 180;
+export const calculateDistance = (longLoc:number, latLoc:number, longDriver:number , latDriver:number) => {
+        const lon_1 = longDriver * Math.PI / 180;
+        const lon_2 = longLoc * Math.PI / 180;
+        const lat_1 = latDriver * Math.PI / 180;
+        const lat_2 = latLoc * Math.PI / 180;
         // Haversine formula
         let dLon = lon_2 - lon_1;
         let dLat = lat_2 - lat_1;
