@@ -32,7 +32,7 @@ export const buildAddressString = (address: HereAddress, depth = addressOrdering
 
 export const getSuggestions = async (query: string): Promise<AddressSuggestion[]> => {
   try {
-    const url = new URL('https://autocomplete.geocoder.api.here.com/6.2/suggest.json')
+    const url = new URL('https://geocode.geocoder.api.here.com/6.2/geocode.json')
     const searchParams = new URLSearchParams({
       app_id: configs.HERE_APPID,
       app_code: configs.HERE_APPCODE,
