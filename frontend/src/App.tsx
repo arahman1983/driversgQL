@@ -5,6 +5,7 @@ import { SearchView } from './views'
 
 export const App: FC = () => {
   const { data } = useQuery<{ helloWorld: string }>(helloWorldQuery)
+
   return (
     // <div>{data?.helloWorld}</div>
     <div className='app-container'>

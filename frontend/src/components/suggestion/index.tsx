@@ -1,14 +1,17 @@
 // import styles from './suggestions.module.css'
+// import { useEffect } from "react"
+import { AddressSuggestion } from "../../addresses"
 
 type Props = {
-  address: string,
-  clickHandler: (address: string) => void
+  address: AddressSuggestion,
+  clickHandler: (address: AddressSuggestion) => void
 }
 
 export default function Suggestions({ address, clickHandler }: Props) {
+  
   return (
     <li onClick={() => clickHandler(address)}>
-      {address}
+      {address.label}
     </li>
   )
 }

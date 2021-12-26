@@ -1,27 +1,36 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Check, Search } from "../../../assets/images";
 import { Results, Suggestions, SearchHeader } from "../../components";
+import debounce from 'lodash.debounce'
 import styles from './searchView.module.css'
+import {AddressSuggestion, getSuggestions} from '../../addresses'
 
 export default function SearchView() {
   const [searchTxt, setSearchTxt] = useState<string>("")
   const [suggestionShow, setSuggestionShow] = useState<boolean>(false)
   const [searchState, setSearchState] = useState<boolean>(true)
+  const [suggestionsList, setSuggestionsList] = useState<AddressSuggestion[]>([])
 
+  const callback = useCallback(debounce((value:string) => {
+    getSuggestions(value).then(addresses => setSuggestionsList(addresses))
+    }, 500), []);
 
-  const handleSearchChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value: string = e.currentTarget.value
-    setSearchState(true)
-    setSearchTxt(value)
-    if (value) {
-      setSuggestionShow(true)
-    } else {
-      setSuggestionShow(false)
-    }
+    const handleSearchChange =  (e: React.FormEvent<HTMLInputElement>) => {
+      const value: string = e.currentTarget?.value
+      setSearchState(true)
+      setSearchTxt(value)
+      if (value) {
+        callback(value)
+        setSuggestionShow(true)
+      } else {
+        setSuggestionShow(false)
+      }
   }
 
-  const suggestClickHandler = (address: string) => {
-    setSearchTxt(address)
+
+
+  const suggestClickHandler = (address: AddressSuggestion) => {
+    setSearchTxt(address.label)
     setSuggestionShow(false)
     setSearchState(false)
   }
@@ -36,9 +45,11 @@ export default function SearchView() {
           {
             suggestionShow &&
             <ul className={styles.suggestions}>
-              <Suggestions address="text1" clickHandler={suggestClickHandler} />
-              <Suggestions address="text3" clickHandler={suggestClickHandler} />
-              <Suggestions address="text2" clickHandler={suggestClickHandler} />
+              {
+                suggestionsList.map((row, index) => 
+                  <Suggestions address={row} clickHandler={suggestClickHandler} />
+                )
+              }
             </ul>
           }
         </div>

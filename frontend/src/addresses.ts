@@ -7,6 +7,7 @@ export interface AddressSuggestion {
     lon: number
     lat: number
   }
+  label: string
   country?: string
   countrycode?: string
 }
@@ -36,7 +37,7 @@ export const getSuggestions = async (query: string): Promise<AddressSuggestion[]
       app_id: configs.HERE_APPID,
       app_code: configs.HERE_APPCODE,
       query,
-      country: wholeEuropeISO3,
+      country: 'DEU',
       maxresults: '5',
       language: 'en'
     })
@@ -46,6 +47,7 @@ export const getSuggestions = async (query: string): Promise<AddressSuggestion[]
     if (!Array.isArray(suggestions)) {
       return []
     }
+    console.log(`suggestions`, suggestions)
     return suggestions.map((suggestion: AddressSuggestion & { address: HereAddress }) => ({
       ...suggestion,
       label: buildAddressString(suggestion.address)
