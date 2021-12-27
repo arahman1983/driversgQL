@@ -18,7 +18,7 @@ export default function Results({data}:Props){
       <SearchHeader title1="Top Matching Drivers" title2="ETA" />
       <ul className={styles.resultsUL}>
         {
-          data && data.map(({name,telephone,EAT}) => <ResultRow name={name} phone={telephone} time={EAT} />)
+          data && data.map(({name,telephone,EAT}, index) => <ResultRow name={name} phone={telephone} time={EAT} key={index} />)
         }
       </ul>
     </div>
