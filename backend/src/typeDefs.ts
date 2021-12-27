@@ -17,6 +17,6 @@ export const typeDefs = `
 
   type Query {
     helloWorld: String
-    getNearestDrivers : [NearestDrivers]
+    getNearestDrivers(longLoc: Float!, latLoc: Float!) : [NearestDrivers]
   }
 `

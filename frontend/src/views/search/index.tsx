@@ -4,17 +4,23 @@ import { Results, Suggestions, SearchHeader } from "../../components";
 import debounce from 'lodash.debounce'
 import styles from './searchView.module.css'
 import {AddressSuggestion, getSuggestions} from '../../addresses'
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { GET_NEAREST_DRIVERS } from '../../queries'
 
 export default function SearchView() {
   const [searchTxt, setSearchTxt] = useState<string>("")
   const [suggestionShow, setSuggestionShow] = useState<boolean>(false)
   const [searchState, setSearchState] = useState<boolean>(true)
   const [suggestionsList, setSuggestionsList] = useState<AddressSuggestion[]>([])
+  const { data } = useQuery(GET_NEAREST_DRIVERS, {variables:{lon: 28.1988, lat: 50.5847}})
+  // const [ getDrivers, { loading, data }] = useLazyQuery(GET_NEAREST_DRIVERS);
 
   const callback = useCallback(debounce((value:string) => {
     getSuggestions(value).then(addresses => setSuggestionsList(addresses))
     }, 500), []);
 
+
+    data && console.log('data :>> ', data);
     const handleSearchChange =  (e: React.FormEvent<HTMLInputElement>) => {
       const value: string = e.currentTarget?.value
       setSearchState(true)
@@ -33,6 +39,8 @@ export default function SearchView() {
     setSearchTxt(address.label)
     setSuggestionShow(false)
     setSearchState(false)
+    // getDrivers({variables:{lon: 28.1988, lat: 50.5847}})
+    
   }
 
   return (
@@ -54,7 +62,7 @@ export default function SearchView() {
           }
         </div>
       </div>
-      <Results />
+      {data && <Results data = {data.getNearestDrivers} />}
     </>
   )
 }

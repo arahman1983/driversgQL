@@ -4,21 +4,26 @@ import styles from './resultsRow.module.css'
 type Props = {
   name: string,
   phone: string,
-  time: string
+  time: number
 }
 
 type colorState = 'success' | 'primary' | 'warning' | 'danger'
 
 export default function ResultRow({name, phone, time}: Props){
   const [state, setState] = useState<colorState>('danger') // success | primary | warning | danger
+  const [EAT, setEAT] = useState<string>("")
 
   useEffect(() => {
-    const hours = Number(time.split("h")[0])
-    hours < 2 
+    const hours = Math.floor(time)
+    const minutes = Math.floor((time - hours) * 60)
+
+    setEAT(`${hours}h ${(minutes<10 && minutes>0 ) ? "0"+minutes: minutes}m`)
+
+    time < 2 
       ? setState('success')
-      : hours < 5
+      : time < 5
       ? setState('primary')
-      : hours < 10
+      : time < 10
       ? setState('warning')
       : setState('danger')
   }, [time])
@@ -30,7 +35,7 @@ export default function ResultRow({name, phone, time}: Props){
         <span className={styles.phone}>{phone}</span>
       </div>
       <div className={styles.timeContainer}>
-        <span className={`${styles.time} ${styles[state]}`}>{time}</span>
+        <span className={`${styles.time} ${styles[state]}`}>{EAT}</span>
       </div>
     </li>
   )
