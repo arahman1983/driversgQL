@@ -1,5 +1,3 @@
-import { DriverList } from './resolvers'
-
 export const typeDefs = `
   type CurrentLocation {
     lat: Float

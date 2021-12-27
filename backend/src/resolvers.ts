@@ -17,7 +17,6 @@ export const resolvers = {
   Query: {
     helloWorld: () => 'Hello World!',
     getNearestDrivers: (_: undefined, variables: {longLoc: number, latLoc: number}): DriverList[] | undefined => {
-      if (variables.longLoc && variables.latLoc) {
         const driversList = drivers.map(driver => (
           {
             ...driver,
@@ -26,9 +25,6 @@ export const resolvers = {
         )).filter(d => d.EAT > 0).sort((a, b) => a.EAT - b.EAT)
         // get the nearest 10 drivers
         return driversList.slice(0, 10)
-      } else {
-        return []
-      }
     }
   }
 }
