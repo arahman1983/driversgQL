@@ -1,4 +1,4 @@
-import {DriverList} from './resolvers'
+import { DriverList } from './resolvers'
 
 export const typeDefs = `
   type CurrentLocation {
