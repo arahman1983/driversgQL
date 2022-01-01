@@ -16,15 +16,16 @@ export interface DriverList {
 export const resolvers = {
   Query: {
     helloWorld: () => 'Hello World!',
-    getNearestDrivers: (_: undefined, variables: {longLoc: number, latLoc: number}): DriverList[] | undefined => {
-        const driversList = drivers.map(driver => (
-          {
-            ...driver,
-            EAT: calculateDistance(variables.longLoc, variables.latLoc, driver.currentLocation.lon, driver.currentLocation.lat) / driver.averageSpeedKmPerHour
-          }
-        )).filter(d => d.EAT > 0).sort((a, b) => a.EAT - b.EAT)
-        // get the nearest 10 drivers
-        return driversList.slice(0, 10)
+    getNearestDrivers: (_: undefined, variables: { longLoc: number, latLoc: number }): DriverList[] | undefined => {
+      const driversList = drivers
+        .map((driver) => ({
+          ...driver,
+          EAT: calculateDistance(variables.longLoc, variables.latLoc, driver.currentLocation.lon, driver.currentLocation.lat) / driver.averageSpeedKmPerHour
+        }))
+        .filter((d) => d.EAT > 0)
+        .sort((a, b) => a.EAT - b.EAT)
+      // get the nearest 10 drivers
+      return driversList.slice(0, 10)
     }
   }
 }
