@@ -18,7 +18,7 @@ export interface HereAddress {
 
 const addressOrdering = ['postalCode', 'street', 'houseNumber', 'district', 'city', 'county', 'state', 'country']
 
-const wholeEuropeISO3 = 'AND,ALB,AUT,BIH,BEL,BGR,BLR,CHE,CYP,CZE,DEU,DNK,EST,ESP,FIN,FRO,FRA,GBR,GIB,GRC,HRV,HUN,IRL,IMN,ISL,ITA,LIE,LTU,LUX,LVA,MCO,MDA,MNE,MKD,MLT,NLD,NOR,POL,PRT,ROU,SRB,RUS,SWE,SVN,SVK,SMR,TUR,UKR,VAT,XKX'
+// const wholeEuropeISO3 = 'AND,ALB,AUT,BIH,BEL,BGR,BLR,CHE,CYP,CZE,DEU,DNK,EST,ESP,FIN,FRO,FRA,GBR,GIB,GRC,HRV,HUN,IRL,IMN,ISL,ITA,LIE,LTU,LUX,LVA,MCO,MDA,MNE,MKD,MLT,NLD,NOR,POL,PRT,ROU,SRB,RUS,SWE,SVN,SVK,SMR,TUR,UKR,VAT,XKX'
 
 export const buildAddressString = (address: HereAddress, depth = addressOrdering.length): string => {
   const addressArr: string[] = []
@@ -47,7 +47,6 @@ export const getSuggestions = async (query: string): Promise<AddressSuggestion[]
     if (!Array.isArray(suggestions)) {
       return []
     }
-    console.log(`suggestions`, suggestions)
     return suggestions.map((suggestion: AddressSuggestion & { address: HereAddress }) => ({
       ...suggestion,
       label: buildAddressString(suggestion.address)

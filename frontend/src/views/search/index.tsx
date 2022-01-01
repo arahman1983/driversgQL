@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
-import { Check, Search } from "../../../assets/images";
-import { Results, Suggestions, SearchHeader } from "../../components";
+import { useCallback, useState } from 'react';
+import { Check, Search } from '../../../assets/images';
+import { Results, Suggestions, SearchHeader } from '../../components';
 import debounce from 'lodash.debounce'
 import styles from './searchView.module.css'
-import {AddressSuggestion, getSuggestions} from '../../addresses'
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { AddressSuggestion, getSuggestions } from '../../addresses'
+import { useQuery } from '@apollo/client';
 import { GET_NEAREST_DRIVERS } from '../../queries'
 
 export default function SearchView() {
@@ -12,25 +12,23 @@ export default function SearchView() {
   const [suggestionShow, setSuggestionShow] = useState<boolean>(false)
   const [searchState, setSearchState] = useState<boolean>(true)
   const [suggestionsList, setSuggestionsList] = useState<AddressSuggestion[]>([])
-  const { data } = useQuery(GET_NEAREST_DRIVERS, {variables:{lon: 28.1988, lat: 50.5847}})
+  const { data } = useQuery(GET_NEAREST_DRIVERS, { variables: { lon: 28.1988, lat: 50.5847 } })
   // const [ getDrivers, { loading, data }] = useLazyQuery(GET_NEAREST_DRIVERS);
 
-  const callback = useCallback(debounce((value:string) => {
+  const callback = useCallback(debounce((value: string) => {
     getSuggestions(value).then(addresses => setSuggestionsList(addresses))
-    }, 500), []);
+  }, 500), []);
 
-
-    data && console.log('data :>> ', data);
-    const handleSearchChange =  (e: React.FormEvent<HTMLInputElement>) => {
-      const value: string = e.currentTarget?.value
-      setSearchState(true)
-      setSearchTxt(value)
-      if (value) {
-        callback(value)
-        setSuggestionShow(true)
-      } else {
-        setSuggestionShow(false)
-      }
+  const handleSearchChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value: string = e.currentTarget?.value
+    setSearchState(true)
+    setSearchTxt(value)
+    if (value) {
+      callback(value)
+      setSuggestionShow(true)
+    } else {
+      setSuggestionShow(false)
+    }
   }
 
 
@@ -40,7 +38,7 @@ export default function SearchView() {
     setSuggestionShow(false)
     setSearchState(false)
     // getDrivers({variables:{lon: 28.1988, lat: 50.5847}})
-    
+
   }
 
   return (
@@ -54,7 +52,7 @@ export default function SearchView() {
             suggestionShow &&
             <ul className={styles.suggestions}>
               {
-                suggestionsList.map((row, index) => 
+                suggestionsList.map((row, index) =>
                   <Suggestions address={row} clickHandler={suggestClickHandler} />
                 )
               }
@@ -62,7 +60,7 @@ export default function SearchView() {
           }
         </div>
       </div>
-      {data && <Results data = {data.getNearestDrivers} />}
+      {data && <Results data={data.getNearestDrivers} />}
     </>
   )
 }
