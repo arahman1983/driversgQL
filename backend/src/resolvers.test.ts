@@ -1,9 +1,10 @@
-// import { resolvers } from './resolvers'
+import { resolvers } from './resolvers'
+const variables = {lon: 28.1988, lat: 50.5847}
 
-// describe('resolvers', () => {
-//   describe('helloWorld', () => {
-//     it('should return Hello World!', () => {
-//       expect(resolvers.Query.helloWorld()).toEqual('Hello World!')
-//     })
-//   })
-// })
+describe('resolvers', () => {
+  describe('getNearestDrivers', () => {
+    it('should return array of drivers', () => {
+      expect(resolvers.Query.getNearestDrivers(undefined,{longLoc: 28.1988, latLoc: 50.5847})).toHaveLength(10)
+    })
+  })
+})
